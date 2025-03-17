@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExpenseFlow - Smart Expense Tracking</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+            color: #333;
+        }
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            background: linear-gradient(45deg, #2c3e50, #3498db);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .description {
+            margin-bottom: 40px;
+            text-align: center;
+            font-size: 1.2em;
+            color: #666;
+            padding: 0 20px;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        .feature {
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+        .feature i {
+            font-size: 2em;
+            color: #3498db;
+            margin-bottom: 15px;
+        }
+        .feature h3 {
+            color: #2c3e50;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .input-methods {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 40px;
+        }
+        .input-methods h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .input-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .input-method {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .input-method i {
+            font-size: 2.5em;
+            color: #3498db;
+            margin-bottom: 15px;
+        }
+        .footer-text {
+            text-align: center;
+            margin-top: 30px;
+            color: #666;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ExpenseFlow</h1>
+        
+        <div class="description">
+            A smart web application designed to help users track expenses, analyze spending habits, 
+            and optimize their shopping experience through AI-powered insights.
+        </div>
+
+        <div class="features-grid">
+            <div class="feature">
+                <i class="fas fa-chart-line"></i>
+                <h3>Expense Tracking</h3>
+                <p>Keep detailed records of your purchases, including store information, prices, and dates. 
+                Stay organized with automatic categorization and real-time updates.</p>
+            </div>
+
+            <div class="feature">
+                <i class="fas fa-brain"></i>
+                <h3>AI-Powered Insights</h3>
+                <p>Get intelligent analysis of your shopping trends and receive personalized suggestions 
+                for cost-saving strategies. Make informed decisions about your finances.</p>
+            </div>
+
+            <div class="feature">
+                <i class="fas fa-tags"></i>
+                <h3>Smart Deal Alerts</h3>
+                <p>Never miss a deal on your frequently purchased items. Our system automatically finds 
+                and notifies you about discounts and special offers on products you regularly buy.</p>
+            </div>
+
+            <div class="feature">
+                <i class="fas fa-shopping-cart"></i>
+                <h3>Grocery List Assistant</h3>
+                <p>Create smart shopping lists based on your past purchases and inventory predictions. 
+                Let AI help you plan your shopping more efficiently.</p>
+            </div>
+        </div>
+
+        <div class="input-methods">
+            <h2>Multiple Ways to Track Expenses</h2>
+            <div class="input-grid">
+                <div class="input-method">
+                    <i class="fas fa-camera"></i>
+                    <h3>Receipt Scanning</h3>
+                    <p>Simply snap a photo of your receipt. Our AI will automatically extract and categorize all the details.</p>
+                </div>
+
+                <div class="input-method">
+                    <i class="fas fa-microphone"></i>
+                    <h3>Voice Entries</h3>
+                    <p>Add expenses on the go using voice commands. Quick, convenient, and hands-free tracking.</p>
+                </div>
+
+                <div class="input-method">
+                    <i class="fas fa-keyboard"></i>
+                    <h3>Manual Entry</h3>
+                    <p>Traditional manual entry with smart autocomplete and recurring expense templates.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-text">
+            Built with AI-driven analytics and an intuitive web interface, 
+            ExpenseFlow simplifies personal finance management for smarter spending.
+        </div>
+    </div>
+</body>
+</html> 
