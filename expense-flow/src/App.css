@@ -22,11 +22,38 @@ body {
 
 /* Header */
 .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background-color: #2C3E4C;
   color: white;
   font-weight: bold;
   padding: 1rem;
-  text-align: center;
+}
+
+.user-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-email {
+  color: #48AAAD;
+}
+
+.logout-btn {
+  background-color: transparent;
+  border: 1px solid #48AAAD;
+  color: #48AAAD;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+  background-color: #48AAAD;
+  color: white;
 }
 
 /* Main Section */

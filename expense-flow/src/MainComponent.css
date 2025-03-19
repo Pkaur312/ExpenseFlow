@@ -1,0 +1,139 @@
+.main-component {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.header-section h2 {
+    color: #2C3E4C;
+    margin: 0;
+}
+
+.add-expense-btn {
+    background-color: #48AAAD;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-expense-btn:hover {
+    background-color: #016064;
+}
+
+.form-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 2rem;
+    z-index: 1000;
+}
+
+.expenses-section {
+    background-color: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.expenses-section h3 {
+    color: #2C3E4C;
+    margin-bottom: 1.5rem;
+}
+
+.no-expenses {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    padding: 2rem;
+}
+
+.expenses-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.expense-item {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 1rem;
+    transition: transform 0.2s ease;
+}
+
+.expense-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.expense-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.expense-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.expense-header h4 {
+    margin: 0;
+    color: #2C3E4C;
+}
+
+.expense-amount {
+    font-weight: bold;
+    color: #48AAAD;
+}
+
+.expense-details {
+    display: flex;
+    gap: 1rem;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.expense-category,
+.expense-date,
+.expense-method {
+    background-color: #e9ecef;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .header-section {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+
+    .expense-details {
+        flex-wrap: wrap;
+    }
+
+    .expense-category,
+    .expense-date,
+    .expense-method {
+        font-size: 0.8rem;
+    }
+} 

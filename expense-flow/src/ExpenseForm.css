@@ -1,0 +1,142 @@
+.expense-form-container {
+    max-width: 500px;
+    margin: 2rem auto;
+    padding: 1rem;
+}
+
+.expense-form {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.form-header h2 {
+    color: #2C3E4C;
+    margin: 0;
+    text-align: center;
+    flex-grow: 1;
+}
+
+.close-btn {
+    position: absolute;
+    right: -1rem;
+    top: -1rem;
+    background: #ff4d4d;
+    color: white;
+    border: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    line-height: 1;
+    transition: background-color 0.3s ease;
+}
+
+.close-btn:hover {
+    background-color: #ff3333;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #2C3E4C;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #48AAAD;
+    box-shadow: 0 0 0 2px rgba(72, 170, 173, 0.2);
+}
+
+.form-group input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.form-group input[type="number"]::-webkit-outer-spin-button,
+.form-group input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.submit-btn, .cancel-btn {
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn {
+    background-color: #48AAAD;
+    color: white;
+}
+
+.submit-btn:hover {
+    background-color: #016064;
+}
+
+.cancel-btn {
+    background-color: #e9ecef;
+    color: #2C3E4C;
+}
+
+.cancel-btn:hover {
+    background-color: #dee2e6;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .expense-form-container {
+        margin: 1rem;
+        padding: 0.5rem;
+    }
+
+    .expense-form {
+        padding: 1.5rem;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .submit-btn, .cancel-btn {
+        width: 100%;
+    }
+} 
