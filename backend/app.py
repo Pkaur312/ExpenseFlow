@@ -9,7 +9,7 @@ from functools import wraps
 print("Starting Flask...")
 
 # Initializing the Firebase Admin
-cred = credentials.Certificate()
+cred = credentials.Certificate() # add path to certificate of firebase here.
 firebase_admin.initialize_app(cred)
 
 app = Flask(__name__)
