@@ -1,0 +1,494 @@
+{% extends "base.html" %}
+
+{% block title %}Settings - ExpenseFlow{% endblock %}
+
+{% block content %}
+<div class="settings">
+    <div class="settings-header">
+        <h1>Settings</h1>
+        <p>Manage your account preferences and settings</p>
+    </div>
+
+    <div class="settings-grid">
+        <!-- Profile Settings -->
+        <div class="settings-section profile-section">
+            <div class="section-header">
+                <div class="header-icon">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="header-content">
+                    <h2>Profile Settings</h2>
+                    <p>Update your personal information</p>
+                </div>
+            </div>
+            <form class="settings-form">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <div class="input-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="name" name="name" value="Your Name" placeholder="Enter your full name">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <div class="input-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="email" name="email" value="your.email@example.com" placeholder="Enter your email">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="currency">Preferred Currency</label>
+                    <div class="input-group">
+                        <i class="fas fa-dollar-sign"></i>
+                        <select id="currency" name="currency">
+                            <option value="USD">USD ($)</option>
+                            <option value="EUR">EUR (€)</option>
+                            <option value="GBP">GBP (£)</option>
+                            <option value="JPY">JPY (¥)</option>
+                            <option value="INR">INR (₹)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="timezone">Time Zone</label>
+                    <div class="input-group">
+                        <i class="fas fa-clock"></i>
+                        <select id="timezone" name="timezone">
+                            <option value="UTC">UTC</option>
+                            <option value="EST">Eastern Time (EST)</option>
+                            <option value="PST">Pacific Time (PST)</option>
+                            <option value="GMT">GMT</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="margin-top: 40px;">
+                    <i class="fas fa-save"></i> Save Changes
+                </button>
+            </form>
+        </div>
+
+        <!-- Notification Preferences -->
+        <div class="settings-section notification-section">
+            <div class="section-header">
+                <div class="header-icon">
+                    <i class="fas fa-bell"></i>
+                </div>
+                <div class="header-content">
+                    <h2>Notification Preferences</h2>
+                    <p>Customize how you receive updates</p>
+                </div>
+            </div>
+            <form class="settings-form">
+                <div class="checkbox-group">
+                    <label class="checkbox-container">
+                        <input type="checkbox" name="email_notifications" checked>
+                        <span class="checkmark"></span>
+                        <div class="checkbox-label">
+                            <h4>Email Notifications</h4>
+                            <p>Receive updates about your expenses and account activity</p>
+                        </div>
+                    </label>
+
+                    <label class="checkbox-container">
+                        <input type="checkbox" name="monthly_report" checked>
+                        <span class="checkmark"></span>
+                        <div class="checkbox-label">
+                            <h4>Monthly Expense Report</h4>
+                            <p>Get a detailed summary of your spending each month</p>
+                        </div>
+                    </label>
+
+                    <label class="checkbox-container">
+                        <input type="checkbox" name="budget_alerts">
+                        <span class="checkmark"></span>
+                        <div class="checkbox-label">
+                            <h4>Budget Alerts</h4>
+                            <p>Get notified when you're approaching your budget limits</p>
+                        </div>
+                    </label>
+
+                    <label class="checkbox-container">
+                        <input type="checkbox" name="expense_reminders">
+                        <span class="checkmark"></span>
+                        <div class="checkbox-label">
+                            <h4>Expense Reminders</h4>
+                            <p>Receive reminders to log your daily expenses</p>
+                        </div>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="margin-top: 40px;">
+                    <i class="fas fa-save"></i> Save Preferences
+                </button>
+            </form>
+        </div>
+
+        <!-- Security Settings -->
+        <div class="settings-section security-section">
+            <div class="section-header">
+                <div class="header-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div class="header-content">
+                    <h2>Security</h2>
+                    <p>Manage your account security</p>
+                </div>
+            </div>
+            <form class="settings-form">
+                <div class="form-group">
+                    <label for="current_password">Current Password</label>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="current_password" name="current_password" placeholder="Enter current password">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="new_password">New Password</label>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="new_password" name="new_password" placeholder="Enter new password">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirm_password">Confirm New Password</label>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm new password">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="margin-top: 40px;">
+                    <i class="fas fa-key"></i> Update Security Settings
+                </button>
+            </form>
+        </div>
+
+        <!-- Danger Zone -->
+        <div class="settings-section danger-zone">
+            <div class="section-header">
+                <div class="header-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div class="header-content">
+                    <h2>Danger Zone</h2>
+                    <p>Irreversible actions</p>
+                </div>
+            </div>
+            <div class="danger-content">
+                <div class="danger-item">
+                    <div class="danger-info">
+                        <h4>Delete Account</h4>
+                        <p>Once you delete your account, there is no going back. Please be certain.</p>
+                    </div>
+                    <div class="danger-actions">
+                        <button type="button" class="btn btn-secondary">
+                            <i class="fas fa-download"></i> Export Data
+                        </button>
+                        <button type="button" class="btn btn-danger">
+                            <i class="fas fa-trash"></i> Delete Account
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .settings {
+        padding: 20px;
+    }
+
+    .settings-header {
+        margin-bottom: 40px;
+        text-align: center;
+    }
+
+    .settings-header h1 {
+        margin-bottom: 10px;
+        font-size: 2.5em;
+        background: linear-gradient(45deg, #2c3e50, #23a6d5);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .settings-header p {
+        color: #666;
+        font-size: 1.1em;
+    }
+
+    .settings-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 30px;
+    }
+
+    .settings-section {
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+
+    .section-header {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+        margin-bottom: 30px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid #f0f0f0;
+    }
+
+    .header-icon {
+        width: 50px;
+        height: 50px;
+        background: rgba(35, 166, 213, 0.1);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .header-icon i {
+        font-size: 1.8em;
+        color: #23a6d5;
+    }
+
+    .header-content h2 {
+        margin: 0;
+        color: #2c3e50;
+        font-size: 1.5em;
+    }
+
+    .header-content p {
+        margin: 5px 0 0;
+        color: #666;
+        font-size: 0.9em;
+    }
+
+    .settings-form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        color: #2c3e50;
+        font-weight: 500;
+    }
+
+    .input-group {
+        position: relative;
+    }
+
+    .input-group i {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #666;
+    }
+
+    .input-group input,
+    .input-group select {
+        width: 100%;
+        padding: 12px 15px 12px 45px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 1em;
+        transition: all 0.3s ease;
+        box-sizing: border-box;
+    }
+
+    .input-group input:focus,
+    .input-group select:focus {
+        outline: none;
+        border-color: #23a6d5;
+        box-shadow: 0 0 0 3px rgba(35, 166, 213, 0.1);
+    }
+
+    .checkbox-group {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .checkbox-container {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+        cursor: pointer;
+        padding: 10px;
+        border-radius: 8px;
+        transition: background-color 0.3s ease;
+    }
+
+    .checkbox-container:hover {
+        background-color: #f8f9fa;
+    }
+
+    .checkbox-container input {
+        display: none;
+    }
+
+    .checkmark {
+        width: 24px;
+        height: 24px;
+        border: 2px solid #ddd;
+        border-radius: 6px;
+        position: relative;
+        transition: all 0.3s ease;
+        flex-shrink: 0;
+    }
+
+    .checkbox-container input:checked + .checkmark {
+        background: #23a6d5;
+        border-color: #23a6d5;
+    }
+
+    .checkbox-container input:checked + .checkmark:after {
+        content: '\f00c';
+        font-family: 'Font Awesome 5 Free';
+        font-weight: 900;
+        position: absolute;
+        color: white;
+        font-size: 14px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .checkbox-label {
+        flex: 1;
+    }
+
+    .checkbox-label h4 {
+        margin: 0 0 5px;
+        color: #2c3e50;
+    }
+
+    .checkbox-label p {
+        margin: 0;
+        color: #666;
+        font-size: 0.9em;
+    }
+
+    .btn {
+        padding: 12px 20px;
+        border: none;
+        border-radius: 8px;
+        font-size: 1em;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .btn-primary {
+        background: #23a6d5;
+        color: white;
+    }
+
+    .btn-primary:hover {
+        background: #1a8ab3;
+        transform: translateY(-2px);
+    }
+
+    .btn-danger {
+        background: #e74c3c;
+        color: white;
+    }
+
+    .btn-danger:hover {
+        background: #c0392b;
+        transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+        background: #f8f9fa;
+        color: #666;
+    }
+
+    .btn-secondary:hover {
+        background: #e9ecef;
+        transform: translateY(-2px);
+    }
+
+    .danger-zone {
+        border: 2px solid #e74c3c;
+        background: rgba(231, 76, 60, 0.02);
+    }
+
+    .danger-content {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .danger-item {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+        background: rgba(231, 76, 60, 0.05);
+        border-radius: 8px;
+    }
+
+    .danger-info h4 {
+        margin: 0 0 5px;
+        color: #e74c3c;
+        font-size: 1.1em;
+    }
+
+    .danger-info p {
+        margin: 0;
+        color: #666;
+        font-size: 0.9em;
+    }
+
+    .danger-actions {
+        display: flex;
+        gap: 10px;
+        justify-content: flex-end;
+    }
+
+    @media (max-width: 768px) {
+        .settings-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .section-header {
+            flex-direction: column;
+            text-align: center;
+            gap: 10px;
+        }
+
+        .header-icon {
+            margin: 0 auto;
+        }
+
+        .danger-actions {
+            flex-direction: column;
+        }
+
+        .btn {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+</style>
+{% endblock %} 

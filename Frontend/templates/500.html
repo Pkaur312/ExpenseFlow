@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}500 - Server Error{% endblock %}
+
+{% block content %}
+<div class="error-container">
+    <h1>500 - Server Error</h1>
+    <p>Something went wrong on our end. Please try again later.</p>
+    <a href="{{ url_for('landing') }}" class="btn">Return to Home</a>
+</div>
+
+<style>
+    .error-container {
+        text-align: center;
+        padding: 40px;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    h1 {
+        font-size: 3em;
+        color: #2c3e50;
+        margin-bottom: 20px;
+    }
+
+    p {
+        color: #666;
+        margin-bottom: 30px;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 12px 24px;
+        background: linear-gradient(45deg, #23a6d5, #23d5ab);
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(35, 166, 213, 0.3);
+    }
+</style>
+{% endblock %} 
