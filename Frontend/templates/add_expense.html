@@ -3,280 +3,225 @@
 {% block title %}Add Expense - ExpenseFlow{% endblock %}
 
 {% block content %}
-<div class="add-expense">
-    <div class="add-expense-header">
-        <h1>Add New Expense</h1>
-        <p>Choose your preferred method to add an expense</p>
-    </div>
+<div class="container mt-5">
+    <h2 class="text-center mb-4" style="background: linear-gradient(135deg, #23a6d5, #23d5ab); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Add New Expense</h2>
 
-    <div class="input-methods-grid">
-        <div class="input-method-card">
+    <div class="input-methods">
+        <div class="method-card">
             <div class="method-icon">
-                <i class="fas fa-keyboard"></i>
+                <i class="fas fa-upload"></i>
             </div>
-            <h3>Manual Entry</h3>
-            <p>Enter expense details manually with smart suggestions</p>
-            <button class="btn btn-primary" onclick="showManualForm()">
-                <i class="fas fa-keyboard"></i> Manual Entry
-            </button>
+            <h3>Upload Receipt</h3>
+            <p>Upload a photo or scan of your receipt</p>
+            <form id="receipt-form" enctype="multipart/form-data">
+                <div class="form-group">
+                    <input type="file" id="receipt" name="receipt" accept="image/*" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-upload"></i> Upload Receipt
+                </button>
+            </form>
         </div>
 
-        <div class="input-method-card">
+        <div class="method-card">
             <div class="method-icon">
                 <i class="fas fa-microphone"></i>
             </div>
             <h3>Voice Command</h3>
-            <p>Speak your expense details and let AI process them</p>
-            <button class="btn btn-primary" id="voiceButton">
+            <p>Add expense using voice command</p>
+            <button id="startVoiceBtn" class="btn btn-primary">
                 <i class="fas fa-microphone"></i> Start Recording
             </button>
-            <div id="voiceStatus" class="alert alert-info d-none mt-3">
-                <span id="voiceStatusText">Click the microphone button to start...</span>
-            </div>
         </div>
 
-        <div class="input-method-card">
+        <div class="method-card">
             <div class="method-icon">
-                <i class="fas fa-camera"></i>
+                <i class="fas fa-keyboard"></i>
             </div>
-            <h3>Scan Receipt</h3>
-            <p>Take a photo of your receipt and let AI extract the details automatically</p>
-            <button class="btn btn-primary" onclick="showReceiptForm()">
-                <i class="fas fa-camera"></i> Scan Receipt
+            <h3>Manual Entry</h3>
+            <p>Enter expense details manually</p>
+            <button id="showFormBtn" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Add Manually
             </button>
         </div>
     </div>
 
-    <!-- Manual Entry Form -->
-    <div id="manual-form" class="expense-form" style="display: none;">
-        <h2>Manual Expense Entry</h2>
-        <form method="POST" action="{{ url_for('add_expense') }}">
-            <div class="form-grid">
-                <div class="form-group">
-                    <label for="amount">Amount</label>
-                    <div class="input-group">
-                        <i class="fas fa-dollar-sign"></i>
-                        <input type="number" id="amount" name="amount" step="0.01" required>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="category">Category</label>
-                    <div class="input-group">
-                        <i class="fas fa-tags"></i>
-                        <select id="category" name="category" required>
-                            <option value="">Select a category</option>
-                            <option value="food">Food & Dining</option>
-                            <option value="transportation">Transportation</option>
-                            <option value="shopping">Shopping</option>
-
-                            <option value="utilities">Bills & Utilities</option>
-                            <option value="entertainment">Entertainment</option>
-                            <option value="health">Health & Medical</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="date">Date</label>
-                    <div class="input-group">
-                        <i class="fas fa-calendar"></i>
-                        <input type="date" id="date" name="date" required>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="description">Description</label>
-                    <div class="input-group">
-                        <i class="fas fa-comment"></i>
-                        <input type="text" id="description" name="description" placeholder="Enter expense description" required>
-                    </div>
+    <div id="manual-form" style="display: none;">
+        <form method="POST" class="expense-form">
+            <div class="form-group">
+                <label for="amount">Amount</label>
+                <div class="input-group">
+                    <span class="input-group-text">$</span>
+                    <input type="number" step="0.01" class="form-control" id="amount" name="amount" required>
                 </div>
             </div>
 
-            <div class="form-actions">
-                <button type="submit" class="btn btn-primary">
-                    <i class="fas fa-plus"></i> Add Expense
-                </button>
-                <button type="button" class="btn btn-secondary" onclick="hideManualForm()">
-                    <i class="fas fa-times"></i> Cancel
-                </button>
+            <div class="form-group">
+                <label for="category">Category</label>
+                <select class="form-control" id="category" name="category" required>
+                    <option value="">Select a category</option>
+                    <option value="food">Food</option>
+                    <option value="transportation">Transportation</option>
+                    <option value="utilities">Utilities</option>
+                    <option value="entertainment">Entertainment</option>
+                    <option value="shopping">Shopping</option>
+                    <option value="health">Health</option>
+                    <option value="other">Other</option>
+                </select>
             </div>
+
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input type="date" class="form-control" id="date" name="date" required>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save"></i> Save Expense
+            </button>
         </form>
     </div>
 </div>
 
 <style>
-
-.add-expense {
-    padding: 2rem;
-}
-
-.add-expense-header {
-    text-align: center;
-    margin-bottom: 2rem;
-}
-
-.input-methods-grid {
+.input-methods {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-bottom: 2rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin: 30px 0;
+    padding: 0 15px;
 }
 
-.input-method-card {
+.method-card {
     background: white;
     border-radius: 10px;
-    padding: 2rem;
+    padding: 25px;
     text-align: center;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     transition: transform 0.2s;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.input-method-card:hover {
+.method-card:hover {
     transform: translateY(-5px);
 }
 
 .method-icon {
-    font-size: 2.5rem;
-    color: #2196f3;
-    margin-bottom: 1rem;
+    font-size: 2.5em;
+    color: #23a6d5;
+    margin-bottom: 20px;
+}
+
+.method-card h3 {
+    margin-bottom: 15px;
+    color: #2c3e50;
+    font-size: 1.4em;
+}
+
+.method-card p {
+    color: #666;
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+#receipt {
+    margin-bottom: 10px;
+}
+
+.btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: auto;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #23a6d5, #23d5ab);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #1f95c0, #1fc09b);
 }
 
 .expense-form {
-    max-width: 800px;
-    margin: 0 auto;
     background: white;
-    padding: 2rem;
+    padding: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.form-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 1.5rem;
+/* Make it responsive */
+@media (max-width: 992px) {
+    .input-methods {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
-.form-group {
-    margin-bottom: 1rem;
-}
-
-.input-group {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.input-group i {
-    color: #666;
-}
-
-.form-actions {
-    display: flex;
-    gap: 1rem;
-    justify-content: flex-end;
-}
-
-input, select {
-    width: 100%;
-    padding: 0.5rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+@media (max-width: 576px) {
+    .input-methods {
+        grid-template-columns: 1fr;
+    }
 }
 </style>
 
 <script>
-function showManualForm() {
-    document.getElementById('manual-form').style.display = 'block';
-}
+// Show/hide manual form
+document.getElementById('showFormBtn').addEventListener('click', function() {
+    const form = document.getElementById('manual-form');
+    form.style.display = form.style.display === 'none' ? 'block' : 'none';
+});
 
-function hideManualForm() {
-    document.getElementById('manual-form').style.display = 'none';
-}
-
-// Voice recognition using Web Speech API
-document.addEventListener('DOMContentLoaded', function() {
-    const voiceButton = document.getElementById('voiceButton');
-    const voiceStatus = document.getElementById('voiceStatus');
-    const voiceStatusText = document.getElementById('voiceStatusText');
+// Handle receipt upload
+document.getElementById('receipt-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    const fileInput = document.getElementById('receipt');
     
-    // Check if browser supports speech recognition
-    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-        const SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
-        const recognition = new SpeechRecognition();
-        recognition.continuous = false;
-        recognition.interimResults = false;
-        recognition.lang = 'en-US';
+    if (!fileInput.files.length) {
+        alert('Please select a file first');
+        return;
+    }
+    
+    formData.append('receipt', fileInput.files[0]);
 
-        voiceButton.addEventListener('click', function() {
-            voiceStatus.classList.remove('d-none');
-            voiceStatusText.textContent = 'Listening... Speak now!';
-            voiceButton.disabled = true;
-            recognition.start();
+    try {
+        const response = await fetch('/upload-receipt', {
+            method: 'POST',
+            body: formData
         });
-
-        recognition.onresult = function(event) {
-            const text = event.results[0][0].transcript;
-            voiceStatusText.textContent = 'Processing: ' + text;
-
-            // Send the voice input to the server for processing
-            fetch('/voice-expense', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ text: text })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    voiceStatusText.textContent = 'Expense added successfully!';
-                    voiceStatus.classList.remove('alert-info');
-                    voiceStatus.classList.add('alert-success');
-                    
-                    setTimeout(() => {
-                        window.location.href = data.redirect;
-                    }, 1500);
-                } else {
-                    voiceStatusText.textContent = 'Error: ' + data.error;
-                    voiceStatus.classList.remove('alert-info');
-                    voiceStatus.classList.add('alert-danger');
-                    voiceButton.disabled = false;
-                }
-            })
-            .catch(error => {
-                voiceStatusText.textContent = 'Error: Could not process voice command';
-                voiceStatus.classList.remove('alert-info');
-                voiceStatus.classList.add('alert-danger');
-                voiceButton.disabled = false;
-            });
-        };
-
-        recognition.onerror = function(event) {
-            voiceStatusText.textContent = 'Error: ' + event.error;
-            voiceStatus.classList.remove('alert-info');
-            voiceStatus.classList.add('alert-danger');
-            voiceButton.disabled = false;
-        };
-
-        recognition.onend = function() {
-            if (voiceButton.disabled && voiceStatus.classList.contains('alert-info')) {
-                voiceStatusText.textContent = 'Did not hear anything. Try again?';
-                voiceButton.disabled = false;
-            }
-        };
-    } else {
-        voiceButton.addEventListener('click', function() {
-            voiceStatus.classList.remove('d-none');
-            voiceStatusText.textContent = 'Speech recognition is not supported in this browser. Please try Chrome or Edge.';
-            voiceStatus.classList.remove('alert-info');
-            voiceStatus.classList.add('alert-warning');
-        });
+        const data = await response.json();
+        
+        if (data.success) {
+            alert('Receipt uploaded successfully!');
+            window.location.href = '/dashboard';
+        } else {
+            alert('Failed to upload receipt: ' + data.error);
+        }
+    } catch (error) {
+        alert('Error uploading receipt');
+        console.error('Error:', error);
     }
 });
 
+// Set default date to today
+document.addEventListener('DOMContentLoaded', function() {
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('date').value = today;
+});
 </script>
 {% endblock %} 

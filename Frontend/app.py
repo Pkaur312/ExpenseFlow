@@ -4,6 +4,8 @@ import requests
 from datetime import datetime
 import json
 import re
+from werkzeug.utils import secure_filename
+import os
 
 app = Flask(__name__)
 app.secret_key = 'your-secret-key-here'  # Change this to a secure secret key in production
@@ -12,6 +14,12 @@ app.config['SESSION_COOKIE_HTTPONLY'] = True
 
 # Backend API URL
 BACKEND_URL = 'http://127.0.0.1:5001'
+
+# Add these configurations
+UPLOAD_FOLDER = 'uploads'
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'pdf'}
+
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # Login required decorator
 def login_required(f):
@@ -105,7 +113,6 @@ def logout():
     return redirect(url_for('landing'))
 
 @app.route('/dashboard')
-
 @login_required
 def dashboard():
     try:
@@ -180,12 +187,10 @@ def add_expense():
 
 @app.route('/history')
 @login_required
-
 def history():
     return render_template('history.html')
 
 @app.route('/settings')
-
 @login_required
 def settings():
     return render_template('settings.html')
@@ -253,6 +258,87 @@ def voice_expense():
             
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
+
+@app.route('/scan-receipt', methods=['POST'])
+@login_required
+def scan_receipt():
+    if 'receipt' not in request.files:
+        return jsonify({'success': False, 'error': 'No file uploaded'}), 400
+    
+    file = request.files['receipt']
+    if file.filename == '':
+        return jsonify({'success': False, 'error': 'No file selected'}), 400
+    
+    if file and allowed_file(file.filename):
+        filename = secure_filename(file.filename)
+        filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        
+        # Create upload folder if it doesn't exist
+        os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+        file.save(filepath)
+        
+        try:
+            # Send to backend for OCR processing
+            headers = {'Authorization': f'Bearer {session.get("token")}'}
+            files = {'receipt': open(filepath, 'rb')}
+            response = requests.post(
+                f'{BACKEND_URL}/api/scan-receipt',
+                files=files,
+                headers=headers
+            )
+            
+            # Clean up uploaded file
+            os.remove(filepath)
+            
+            if response.status_code == 200:
+                return response.json()
+            else:
+                return jsonify({'success': False, 'error': 'Failed to process receipt'}), 400
+                
+        except Exception as e:
+            return jsonify({'success': False, 'error': str(e)}), 500
+            
+    return jsonify({
+        'success': False, 
+        'error': f'Invalid file type. Allowed types are: {", ".join(ALLOWED_EXTENSIONS)}'
+    }), 400
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+@app.route('/upload-receipt', methods=['POST'])
+@login_required
+def upload_receipt():
+    if 'receipt' not in request.files:
+        return jsonify({'success': False, 'error': 'No file uploaded'}), 400
+    
+    file = request.files['receipt']
+    if file.filename == '':
+        return jsonify({'success': False, 'error': 'No file selected'}), 400
+    
+    if file and allowed_file(file.filename):
+        filename = secure_filename(file.filename)
+        
+        # Create upload folder if it doesn't exist
+        os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+        
+        filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        file.save(filepath)
+        
+        try:
+            # For now, just save the file and return success
+            # Later we'll add the backend processing
+            return jsonify({
+                'success': True,
+                'message': 'Receipt uploaded successfully'
+            })
+            
+        except Exception as e:
+            if os.path.exists(filepath):
+                os.remove(filepath)
+            return jsonify({'success': False, 'error': str(e)}), 500
+            
+    return jsonify({'success': False, 'error': 'Invalid file type'}), 400
 
 @app.errorhandler(404)
 def page_not_found(e):
