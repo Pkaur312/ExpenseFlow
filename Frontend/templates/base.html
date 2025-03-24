@@ -208,10 +208,17 @@
                     ExpenseFlow
                 </a>
                 <div class="nav-links">
+
+                    {% if 'user' in session %}
                     <a href="/dashboard"><i class="fas fa-chart-line"></i> Dashboard</a>
                     <a href="/add-expense"><i class="fas fa-plus"></i> Add Expense</a>
                     <a href="/history"><i class="fas fa-history"></i> History</a>
                     <a href="/settings"><i class="fas fa-cog"></i> Settings</a>
+                    <a href="/logout" style="color: #ff6b6b;"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    {% else %}
+                    <a href="/login"><i class="fas fa-sign-in-alt"></i> Login</a>
+                    <a href="/signup"><i class="fas fa-user-plus"></i> Sign Up</a>
+                    {% endif %}
                 </div>
             </div>
         </div>

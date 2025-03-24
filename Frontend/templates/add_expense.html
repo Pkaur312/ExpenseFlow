@@ -12,12 +12,21 @@
     <div class="input-methods-grid">
         <div class="input-method-card">
             <div class="method-icon">
+<<<<<<< HEAD
                 <i class="fas fa-camera"></i>
             </div>
             <h3>Scan Receipt</h3>
             <p>Take a photo of your receipt and let AI extract the details automatically</p>
             <button class="btn btn-primary">
                 <i class="fas fa-camera"></i> Scan Receipt
+=======
+                <i class="fas fa-keyboard"></i>
+            </div>
+            <h3>Manual Entry</h3>
+            <p>Enter expense details manually with smart suggestions</p>
+            <button class="btn btn-primary" onclick="showManualForm()">
+                <i class="fas fa-keyboard"></i> Manual Entry
+>>>>>>> Kunwar
             </button>
         </div>
 
@@ -27,26 +36,30 @@
             </div>
             <h3>Voice Command</h3>
             <p>Speak your expense details and let AI process them</p>
-            <button class="btn btn-primary">
+            <button class="btn btn-primary" id="voiceButton">
                 <i class="fas fa-microphone"></i> Start Recording
             </button>
+            <div id="voiceStatus" class="alert alert-info d-none mt-3">
+                <span id="voiceStatusText">Click the microphone button to start...</span>
+            </div>
         </div>
 
         <div class="input-method-card">
             <div class="method-icon">
-                <i class="fas fa-keyboard"></i>
+                <i class="fas fa-camera"></i>
             </div>
-            <h3>Manual Entry</h3>
-            <p>Enter expense details manually with smart suggestions</p>
-            <button class="btn btn-primary" onclick="showManualForm()">
-                <i class="fas fa-keyboard"></i> Manual Entry
+            <h3>Scan Receipt</h3>
+            <p>Take a photo of your receipt and let AI extract the details automatically</p>
+            <button class="btn btn-primary" onclick="showReceiptForm()">
+                <i class="fas fa-camera"></i> Scan Receipt
             </button>
         </div>
     </div>
 
-    <div id="manual-form" class="manual-form" style="display: none;">
+    <!-- Manual Entry Form -->
+    <div id="manual-form" class="expense-form" style="display: none;">
         <h2>Manual Expense Entry</h2>
-        <form method="POST" action="{{ url_for('add_expense') }}" class="expense-form">
+        <form method="POST" action="{{ url_for('add_expense') }}">
             <div class="form-grid">
                 <div class="form-group">
                     <label for="amount">Amount</label>
@@ -65,7 +78,8 @@
                             <option value="food">Food & Dining</option>
                             <option value="transportation">Transportation</option>
                             <option value="shopping">Shopping</option>
-                            <option value="bills">Bills & Utilities</option>
+
+                            <option value="utilities">Bills & Utilities</option>
                             <option value="entertainment">Entertainment</option>
                             <option value="health">Health & Medical</option>
                             <option value="other">Other</option>
@@ -103,178 +117,84 @@
 </div>
 
 <style>
-    .add-expense {
-        padding: 20px;
-    }
 
-    .add-expense-header {
-        margin-bottom: 30px;
-        text-align: center;
-    }
+.add-expense {
+    padding: 2rem;
+}
 
-    .add-expense-header h1 {
-        margin-bottom: 10px;
-    }
+.add-expense-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
 
-    .add-expense-header p {
-        color: #666;
-    }
+.input-methods-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
 
-    .input-methods-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 30px;
-        margin-bottom: 40px;
-    }
+.input-method-card {
+    background: white;
+    border-radius: 10px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
 
-    .input-method-card {
-        background: white;
-        padding: 30px;
-        border-radius: 15px;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        text-align: center;
-        transition: transform 0.3s ease;
-    }
+.input-method-card:hover {
+    transform: translateY(-5px);
+}
 
-    .input-method-card:hover {
-        transform: translateY(-5px);
-    }
+.method-icon {
+    font-size: 2.5rem;
+    color: #2196f3;
+    margin-bottom: 1rem;
+}
 
-    .method-icon {
-        width: 80px;
-        height: 80px;
-        background: rgba(35, 166, 213, 0.1);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 auto 20px;
-    }
+.expense-form {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
 
-    .method-icon i {
-        font-size: 2.5em;
-        color: #23a6d5;
-    }
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
 
-    .input-method-card h3 {
-        margin-bottom: 15px;
-        color: #2c3e50;
-    }
+.form-group {
+    margin-bottom: 1rem;
+}
 
-    .input-method-card p {
-        color: #666;
-        margin-bottom: 20px;
-    }
+.input-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
 
-    .manual-form {
-        background: white;
-        padding: 30px;
-        border-radius: 15px;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        margin-top: 30px;
-    }
+.input-group i {
+    color: #666;
+}
 
-    .manual-form h2 {
-        margin-bottom: 30px;
-        text-align: center;
-    }
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+}
 
-    .form-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 20px;
-        margin-bottom: 30px;
-    }
-
-    .form-group {
-        margin-bottom: 20px;
-    }
-
-    .form-group label {
-        display: block;
-        margin-bottom: 8px;
-        color: #2c3e50;
-        font-weight: 500;
-    }
-
-    .input-group {
-        position: relative;
-    }
-
-    .input-group i {
-        position: absolute;
-        left: 15px;
-        top: 50%;
-        transform: translateY(-50%);
-        color: #666;
-    }
-
-    .input-group input,
-    .input-group select {
-        width: 100%;
-        padding: 12px 15px 12px 45px;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        font-size: 1em;
-        transition: border-color 0.3s ease;
-        box-sizing: border-box;
-    }
-
-    .input-group input:focus,
-    .input-group select:focus {
-        outline: none;
-        border-color: #23a6d5;
-    }
-
-    .form-actions {
-        display: flex;
-        gap: 15px;
-        justify-content: flex-end;
-    }
-
-    .btn {
-        padding: 12px 20px;
-        border: none;
-        border-radius: 8px;
-        font-size: 1em;
-        font-weight: 500;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-    }
-
-    .btn-primary {
-        background: #23a6d5;
-        color: white;
-    }
-
-    .btn-primary:hover {
-        background: #1a8ab3;
-        transform: translateY(-2px);
-    }
-
-    .btn-secondary {
-        background: #f8f9fa;
-        color: #666;
-    }
-
-    .btn-secondary:hover {
-        background: #e9ecef;
-        transform: translateY(-2px);
-    }
-
-    @media (max-width: 768px) {
-        .form-actions {
-            flex-direction: column;
-        }
-
-        .btn {
-            width: 100%;
-            justify-content: center;
-        }
-    }
+input, select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
 </style>
 
 <script>
@@ -285,5 +205,87 @@ function showManualForm() {
 function hideManualForm() {
     document.getElementById('manual-form').style.display = 'none';
 }
+
+// Voice recognition using Web Speech API
+document.addEventListener('DOMContentLoaded', function() {
+    const voiceButton = document.getElementById('voiceButton');
+    const voiceStatus = document.getElementById('voiceStatus');
+    const voiceStatusText = document.getElementById('voiceStatusText');
+    
+    // Check if browser supports speech recognition
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+        const SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
+        const recognition = new SpeechRecognition();
+        recognition.continuous = false;
+        recognition.interimResults = false;
+        recognition.lang = 'en-US';
+
+        voiceButton.addEventListener('click', function() {
+            voiceStatus.classList.remove('d-none');
+            voiceStatusText.textContent = 'Listening... Speak now!';
+            voiceButton.disabled = true;
+            recognition.start();
+        });
+
+        recognition.onresult = function(event) {
+            const text = event.results[0][0].transcript;
+            voiceStatusText.textContent = 'Processing: ' + text;
+
+            // Send the voice input to the server for processing
+            fetch('/voice-expense', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ text: text })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    voiceStatusText.textContent = 'Expense added successfully!';
+                    voiceStatus.classList.remove('alert-info');
+                    voiceStatus.classList.add('alert-success');
+                    
+                    setTimeout(() => {
+                        window.location.href = data.redirect;
+                    }, 1500);
+                } else {
+                    voiceStatusText.textContent = 'Error: ' + data.error;
+                    voiceStatus.classList.remove('alert-info');
+                    voiceStatus.classList.add('alert-danger');
+                    voiceButton.disabled = false;
+                }
+            })
+            .catch(error => {
+                voiceStatusText.textContent = 'Error: Could not process voice command';
+                voiceStatus.classList.remove('alert-info');
+                voiceStatus.classList.add('alert-danger');
+                voiceButton.disabled = false;
+            });
+        };
+
+        recognition.onerror = function(event) {
+            voiceStatusText.textContent = 'Error: ' + event.error;
+            voiceStatus.classList.remove('alert-info');
+            voiceStatus.classList.add('alert-danger');
+            voiceButton.disabled = false;
+        };
+
+        recognition.onend = function() {
+            if (voiceButton.disabled && voiceStatus.classList.contains('alert-info')) {
+                voiceStatusText.textContent = 'Did not hear anything. Try again?';
+                voiceButton.disabled = false;
+            }
+        };
+    } else {
+        voiceButton.addEventListener('click', function() {
+            voiceStatus.classList.remove('d-none');
+            voiceStatusText.textContent = 'Speech recognition is not supported in this browser. Please try Chrome or Edge.';
+            voiceStatus.classList.remove('alert-info');
+            voiceStatus.classList.add('alert-warning');
+        });
+    }
+});
+
 </script>
 {% endblock %} 
