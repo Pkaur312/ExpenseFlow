@@ -1,1 +1,11 @@
 **/.DS_Store
+.env
+venv/
+__pycache__/
+Frontend/__pycache__/
+Frontend/node_modules/
+*.pyc
+*.pyo
+*.pyd
+*.pyw
+*.pyz

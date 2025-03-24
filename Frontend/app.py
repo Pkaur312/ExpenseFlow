@@ -13,7 +13,6 @@ app.config['SESSION_COOKIE_HTTPONLY'] = True
 # Backend API URL
 BACKEND_URL = 'http://127.0.0.1:5001'
 
->>>>>>> Kunwar
 # Login required decorator
 def login_required(f):
     @wraps(f)
@@ -264,4 +263,4 @@ def internal_server_error(e):
     return render_template('500.html'), 500
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5090) 
+    app.run(debug=True, port=5100) 
