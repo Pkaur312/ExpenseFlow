@@ -48,29 +48,29 @@
             </a>
         </div>
         
-        <div class="transactions-list">
+        <div class="transactions-list" style="max-height: 500px; overflow-y: auto;">
             {% if expenses %}
-                {% for expense in expenses|sort(attribute='date', reverse=True) %}
+                {% for expense in expenses %}
                 <div class="transaction-item">
                     <div class="transaction-icon">
-                        {% if expense.category == 'food' %}
+                        {% if expense.category == 'Food & Dining' %}
                             <i class="fas fa-utensils"></i>
-                        {% elif expense.category == 'transportation' %}
+                        {% elif expense.category == 'Transportation' %}
                             <i class="fas fa-car"></i>
-                        {% elif expense.category == 'shopping' %}
+                        {% elif expense.category == 'Shopping' %}
                             <i class="fas fa-shopping-bag"></i>
-                        {% elif expense.category == 'bills' %}
+                        {% elif expense.category == 'Bills & Utilities' %}
                             <i class="fas fa-file-invoice-dollar"></i>
-                        {% elif expense.category == 'entertainment' %}
+                        {% elif expense.category == 'Entertainment' %}
                             <i class="fas fa-film"></i>
-                        {% elif expense.category == 'health' %}
+                        {% elif expense.category == 'Healthcare' %}
                             <i class="fas fa-heartbeat"></i>
                         {% else %}
                             <i class="fas fa-receipt"></i>
                         {% endif %}
                     </div>
                     <div class="transaction-details">
-                        <h4>{{ expense.description }}</h4>
+                        <h4>{{ expense.description or 'Expense' }}</h4>
                         <p>{{ expense.category|title }} • {{ expense.date }}</p>
                     </div>
                     <div class="transaction-amount">
@@ -159,31 +159,17 @@
         justify-content: space-between;
         align-items: center;
         margin-bottom: 20px;
+        padding: 0 10px;
     }
 
     .section-header h3 {
         margin: 0;
     }
 
-    .btn {
-        padding: 8px 16px;
-        border-radius: 8px;
-        font-size: 0.9em;
-        text-decoration: none;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        transition: all 0.3s ease;
-    }
-
-    .btn-primary {
-        background: #23a6d5;
-        color: white;
-    }
-
-    .btn-primary:hover {
-        background: #1e95c0;
-        transform: translateY(-2px);
+    .transactions-list {
+        border: 1px solid #eee;
+        border-radius: 10px;
+        overflow: hidden;
     }
 
     .transaction-item {
@@ -211,6 +197,7 @@
         align-items: center;
         justify-content: center;
         margin-right: 15px;
+        flex-shrink: 0;
     }
 
     .transaction-icon i {
@@ -219,11 +206,15 @@
 
     .transaction-details {
         flex: 1;
+        min-width: 0;
     }
 
     .transaction-details h4 {
         margin: 0;
         color: #2c3e50;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .transaction-details p {
@@ -235,15 +226,59 @@
     .transaction-amount {
         font-weight: bold;
         color: #2c3e50;
+        margin-left: 15px;
+        flex-shrink: 0;
     }
 
     .empty {
         opacity: 0.5;
     }
 
+    /* Custom scrollbar styling */
+    .transactions-list::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .transactions-list::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 4px;
+    }
+
+    .transactions-list::-webkit-scrollbar-thumb {
+        background: #23a6d5;
+        border-radius: 4px;
+    }
+
+    .transactions-list::-webkit-scrollbar-thumb:hover {
+        background: #1e95c0;
+    }
+
     @media (max-width: 768px) {
         .stats-grid {
             grid-template-columns: 1fr;
+        }
+
+        .transaction-item {
+            flex-direction: row;
+            padding: 10px;
+        }
+
+        .transaction-icon {
+            width: 35px;
+            height: 35px;
+            margin-right: 10px;
+        }
+
+        .transaction-details h4 {
+            font-size: 0.9em;
+        }
+
+        .transaction-details p {
+            font-size: 0.8em;
+        }
+
+        .transaction-amount {
+            font-size: 0.9em;
         }
     }
 </style>
