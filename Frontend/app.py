@@ -9,17 +9,19 @@ from werkzeug.utils import secure_filename
 import pytesseract
 from PIL import Image
 
+
 app = Flask(__name__)
 app.secret_key = 'your-secret-key-here'  # Change this to a secure secret key in production
 app.config['SESSION_COOKIE_SECURE'] = False  # Set to True in production with HTTPS
 app.config['SESSION_COOKIE_HTTPONLY'] = True
 
 # Backend API URL
-BACKEND_URL = 'http://127.0.0.1:5001'
+BACKEND_URL = 'http://127.0.0.1:5680'
+
 
 TAGGUN_API_KEY = 'YOUR_TAGGUN_API_KEY'  # You'll need to get this from Taggun
 UPLOAD_FOLDER = 'temp_uploads'
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'pdf'}
 
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
@@ -110,7 +112,6 @@ def signup():
         except Exception as e:
             flash('An error occurred. Please try again.', 'error')
             return redirect(url_for('signup'))
-    
     return render_template('signup.html')
 
 @app.route('/logout')
@@ -291,6 +292,7 @@ def voice_expense():
             
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
+
 
 def preprocess_image(image_path):
     """Preprocess the image for better OCR results"""
@@ -658,4 +660,4 @@ def internal_server_error(e):
     return render_template('500.html'), 500
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5090) 
+    app.run(debug=True, port=5690) 

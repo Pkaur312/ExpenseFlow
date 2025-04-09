@@ -227,4 +227,4 @@ def home():
 
 if __name__ == '__main__':
     print("Running ExpenseFlow Backend API...")
-    app.run(debug=True, port=5001) 
+    app.run(debug=True, port=5680) 
